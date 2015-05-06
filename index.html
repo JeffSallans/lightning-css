@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Advance CSS</title>
+
+		<meta name="description" content="A lightning talk for advance CSS">
+		<meta name="author" content="Jeff Sallans">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="css/lightning.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>CSS</h1>
+					<h3>Best Practices in 5 minutes</h3>
+					<p>
+						<small>Created by <a href="http://github.com/JeffSallans">Jeff Sallans</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Positioning</h2>
+					<section>
+						<h3>Block vs Inline</h3>
+						<div class="pull-left">
+							<u>Inline</u>
+							<br />
+							take only as much space as they need, 
+							<br />
+							<b>no</b> new line after use
+						</div>
+						<div class="pull-right">
+							<br >
+							<br >
+							<br >
+							<br >
+							<br >
+							<u>Block</u>
+							<br >
+							spanning the whole width of the available space,
+							<br />
+							new line after use
+						</div>
+					</section>
+					<section>
+						<h3>HTML Element Default</h3>
+						<p>
+							<b>Inline</b> - span, a, strong, em, img, br, input, abbr, acronym
+						</p>
+						<p>
+							<b>Block</b> - div, h1...h6, p, ul, li, table, blockquote, pre, form
+						</p>
+					</section>
+
+					<section>
+						<h3>Absolute vs Relative</h3>
+						<div class="pull-left">
+							<br >
+							<br >
+							<br >
+							<br >
+							<br >
+							<u>Absolute</u>
+							<br />
+							element will be positioned in reference to parent element with position property defined or document body
+						</div>
+						<div class="pull-right">
+							<u>Relative</u>
+							<br >
+							element will be positioned after the last relative sibling element
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<h2>Selectors</h2>
+					<p>Reduce number of classes defined</p>
+					<p>
+						<a href="http://www.w3schools.com/cssref/css_selectors.asp">http://www.w3schools.com/cssref/css_selectors.asp</a>
+					</p>
+				</section>
+				<section>
+					<h2>Selectivity</h2>
+					<ol>
+						<li>ID</li>
+						<li>Class</li>
+						<li>Tag</li>
+					</ol>
+					<p class="reference">
+						<a href="http://snook.ca/archives/html_and_css/understanding_c">http://snook.ca/archives/html_and_css/understanding_c</a>
+					</p>
+				</section>
+
+				<section>
+					<h2>Best Practices</h2>
+					<section>
+						<h3>Work inside a container</h3>
+						<p>To be scalable</p>
+						<ul>
+							<li>Define container with class</li>
+							<li>Use selectors to get inner elements</li>
+							<li>Define the containers position</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3>Use multiple classes</h3>
+						<p>To write less code</p>
+						<pre><code data-trim contenteditable>
+p.underline {
+	text-decoration: underline;
+	font-size: 20px;
+}
+
+p.underline.larger {
+	font-size: 30px;
+}
+						</code></pre>	
+						<div class="pull-left">
+							<pre><code data-trim contenteditable>
+<p class="underline">Test</p>
+							</code></pre>
+							<p class="underline">Test</p>
+						</div>
+						<div class="pull-right">
+							<pre><code data-trim contenteditable>
+<p class="underline larger">Test</p>
+							</code></pre>
+							<p class="underline larger">Test</p>
+						</div>
+					</section>
+
+
+					<section>
+						<h3>Separate JQuery and CSS</h3>
+						<pre><code data-trim contenteditable>
+/*Displays small text on the bottom of slides*/
+p.reference:not(.custom) {
+	position: absolute;
+	top: 450px;
+	width: 100%;
+	font-size: 20px;
+}
+						</code></pre>
+						<pre><code data-trim contenteditable>
+$('.reference').innerHTML();
+						</code></pre>
+						<p>To decouple style with functionality</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>CSS VS Javascript animations</h2>
+					<p>
+						<pre><code data-trim contenteditable>
+div.square {
+	color: #fff;
+	background: #f93;
+	font-size: 20px;
+	padding: 5px;
+	min-height: 20px;
+
+	display: block;
+	position: absolute;
+
+	transition: all 1s
+}
+div.square:hover {
+	min-height: 100px;
+}
+						</code></pre>
+						<div class="square">hover</div>
+					</p>
+					<p class="reference">
+						<a href="http://css3.bradshawenterprises.com/transitions/">http://css3.bradshawenterprises.com/transitions/</a>
+					</p>
+				</section>				
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
